@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}商品詳細{% endblock %}
+{% block content %}
+<h1>商品詳細</h1>
+<table class="table table-striped table-hover table-bordered">
+    <tr>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>カテゴリ</th>
+        <th>画像</th>
+    </tr>
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }} 円</td>
+        <td>{{ product.category }}</td>
+        <td><img src="{{ product.img.url }}" style="width:100px height:auto;"></td>
+    </tr>
+</table>
+
+<h2>詳細情報</h2>
+{% for detail in product.details.all %}
+  <li><strong>{{ detail.detail_type }}:</strong>{{ detail.content }}</li>
+{% empty %}
+  <li>詳細情報はまだ登録されていません。</li>
+{% endfor %}  
+
+<a href="{% url 'list' %}">戻る</a>
+{% endblock %}
